@@ -21,11 +21,18 @@ func TestXxx(t *testing.T) {
 }
 
 func TestTags(t *testing.T) {
+	fmt.Println("Testing")
 	Init()
-	db.AutoMigrate(&Tags{})
+	db.AutoMigrate(&Tag{})
 
-	db.Create(&Tags{"tag1-", "id1-", 0})
-	db.Create(&Tags{"tag1-", "id2-", 0})
-	db.Create(&Tags{"tag2-", "id1-", 0})
-	db.Create(&Tags{"tag2-", "id2-", 0})
+	db.Create(&Tag{"tag1-", "id1-", 0})
+	db.Create(&Tag{"tag1-", "id2-", 0})
+	db.Create(&Tag{"tag2-", "id1-", 0})
+	db.Create(&Tag{"tag2-", "id2-", 0})
+
+	tg := &Tag{Tag: "tag1-", Id: "id2-", Cnt: 5}
+	tg.Read(db, "")
+
+	fmt.Println(tg)
+
 }

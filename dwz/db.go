@@ -36,19 +36,19 @@ func (o *Link) Read(db *gorm.DB, id string) (err error) {
 }
 
 // to store the tag relationships.
-type Tags struct {
+type Tag struct {
 	Tag string `gorm:"primaryKey;not null"`
 	Id  string `gorm:"primaryKey;not null"`
 	Cnt int    `gorm:"not null;"` // times that the tag was tagged
 }
 
-func (o *Tags) Create(db *gorm.DB) (err error) {
+func (o *Tag) Create(db *gorm.DB) (err error) {
 	tx := db.Create(o)
 	return tx.Error
 }
 
-func (o *Tags) Read(db *gorm.DB, id string) (err error) {
-	tx := db.First(o, id)
+func (o *Tag) Read(db *gorm.DB, id string) (err error) {
+	tx := db.First(o)
 	return tx.Error
 }
 
