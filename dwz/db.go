@@ -37,9 +37,12 @@ func (l *Link) Read(db *gorm.DB, id string) (err error) {
 
 // to store the tag relationships.
 type Tags struct {
-	Tag string `gorm:"primaryKey,index:"`
+	Tag string `gorm:"primaryKey"`
 	Id  string `gorm:"primaryKey"`
 }
 
 // PRAGMA table_info('tags');
-// find that Tag is not primaryKey
+// find that Tag is not primaryKey (SQLite)
+
+// SELECT * FROM sqlite_master WHERE type = 'index';
+// find indexes (SQLite)
