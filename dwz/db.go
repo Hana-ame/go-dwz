@@ -33,8 +33,14 @@ func (o *Link) Create(db *gorm.DB) (err error) {
 	return tx.Error
 }
 
-func (o *Link) Read(db *gorm.DB, id string) (err error) {
-	tx := db.First(o, id)
+func (o *Link) Read(db *gorm.DB) (err error) {
+	tx := db.First(o)
+	return tx.Error
+}
+
+// not tested
+func (o *Link) Delete(db *gorm.DB) (err error) {
+	tx := db.Delete(o)
 	return tx.Error
 }
 
@@ -52,6 +58,12 @@ func (o *Tag) Create(db *gorm.DB) (err error) {
 
 func (o *Tag) Read(db *gorm.DB) (err error) {
 	tx := db.First(o)
+	return tx.Error
+}
+
+// not tested
+func (o *Tag) Update(db *gorm.DB) (err error) {
+	tx := db.Save(o)
 	return tx.Error
 }
 

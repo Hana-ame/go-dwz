@@ -9,10 +9,12 @@ func TestXxx(t *testing.T) {
 	Init()
 	db.AutoMigrate(&Link{})
 
-	db.Create(&Link{Id: "D42"})
-	db.Create(&Link{Id: "D42"})
-	db.Create(&Link{Id: "D42", Description: "d"})
-	db.Create(&Link{Id: "D42"})
+	db.Create(&Link{Id: "1", Url: "Url1"})
+	db.Create(&Link{Id: "2", Url: "Url3"})
+	db.Create(&Link{Id: "3", Url: "Url2"})
+	// db.Create(&Link{Id: "D42"})
+	// db.Create(&Link{Id: "D42", Description: "d"})
+	// db.Create(&Link{Id: "D42"})
 
 	var l Link
 	db.First(&l)
