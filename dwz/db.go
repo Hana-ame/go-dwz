@@ -37,8 +37,8 @@ func (l *Link) Read(db *gorm.DB, id string) (err error) {
 
 // to store the tag relationships.
 type Tags struct {
-	Tag string `gorm:"primaryKey"`
-	Id  string `gorm:"primaryKey"`
+	Tag string `gorm:"primaryKey;not null"`
+	Id  string `gorm:"primaryKey;not null"`
 }
 
 // PRAGMA table_info('tags');
