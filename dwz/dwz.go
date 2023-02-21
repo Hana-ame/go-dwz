@@ -22,17 +22,25 @@ func GenID(n int) string {
 	return string(b)
 }
 
-func GetUrl(id string) (string, error) { // works well
+func GetLink(id string) (*Link, error) { // works well
 	l := &Link{
 		Id: id,
 	}
 	err := l.Read(db)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	// TODO：update ClickCnt
 
+	return l, nil
+}
+
+func GetUrl(id string) (string, error) {
+	l, err := GetLink(id)
+	if err != nil {
+		return "", err
+	}
 	return l.Url, nil
 }
 
