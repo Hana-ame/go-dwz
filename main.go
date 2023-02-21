@@ -77,7 +77,18 @@ func main() {
 
 	// not tested
 	app.Get("/tag/:tag", func(c *fiber.Ctx) error {
-		return nil
+		tag := c.Params("tag", "")
+		if tag == "" {
+			return c.Status(fiber.StatusBadRequest).SendString("Sould have tag")
+		}
+
+		// query all
+		ol, err := dwz.ReadLinksByTag(tag)
+		if err != nil {
+			return err
+		}
+
+		return c.Status(fiber.StatusOK).JSON(ol)
 	})
 
 	// not tested
@@ -96,3 +107,11 @@ func main() {
 
 	app.Listen(":3000")
 }
+
+/*
+	what to do next
+	测试一下这些接口是不是能用，
+	然后用postman看接口是不是能用。
+
+	然后可以开始写前端了。
+*/

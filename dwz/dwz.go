@@ -95,3 +95,13 @@ func AddTag(tag, id string) error {
 
 	return nil
 }
+
+// not tested
+// must be tested
+// https://gorm.io/zh_CN/docs/query.html#%E6%A3%80%E7%B4%A2%E5%85%A8%E9%83%A8%E5%AF%B9%E8%B1%A1
+// https://gorm.io/zh_CN/docs/query.html#%E6%9D%A1%E4%BB%B6
+func ReadLinksByTag(tag string) ([]*Link, error) {
+	var rst []*Link
+	tx := db.InnerJoins("Id").Find(rst)
+	return rst, tx.Error
+}

@@ -26,6 +26,7 @@ type Link struct {
 	Url         string    `gorm:"not null;"`           // true URL of the link
 	ClickCnt    int       `gorm:"not null;"`           // times that the link was clicked
 	CreatedAt   time.Time `gorm:"not null;"`
+	Order       int       `gorm:"not null;"` // how to sort https://stackoverflow.com/questions/514943/order-a-mysql-table-by-two-columns
 }
 
 func (o *Link) Create(db *gorm.DB) (err error) {
