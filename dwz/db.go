@@ -1,6 +1,8 @@
 package dwz
 
 import (
+	"time"
+
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -19,10 +21,11 @@ func Init() (err error) {
 
 // to store the links Object.
 type Link struct {
-	Id          string `gorm:"not null;primaryKey"` // the short one for link
-	Description string `gorm:"not null;"`           // intro
-	Url         string `gorm:"not null;"`           // true URL of the link
-	ClickCnt    int    `gorm:"not null;"`           // times that the link was clicked
+	Id          string    `gorm:"not null;primaryKey"` // the short one for link
+	Description string    `gorm:"not null;"`           // intro
+	Url         string    `gorm:"not null;"`           // true URL of the link
+	ClickCnt    int       `gorm:"not null;"`           // times that the link was clicked
+	CreatedAt   time.Time `gorm:"not null;"`
 }
 
 func (o *Link) Create(db *gorm.DB) (err error) {
