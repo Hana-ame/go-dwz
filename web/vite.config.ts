@@ -10,6 +10,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  base: "",
   server: {
     proxy: {
       "/go" : "http://localhost:3000", // it works like prefix (/go*)
