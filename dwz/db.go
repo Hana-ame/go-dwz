@@ -1,6 +1,7 @@
 package dwz
 
 import (
+	"fmt"
 	"time"
 
 	"gorm.io/driver/sqlite"
@@ -16,18 +17,21 @@ func Init() (err error) {
 		return err
 	}
 
+	db.AutoMigrate(&Link{})
+	db.AutoMigrate(&Tag{})
+
 	return nil
 }
 
 // to store the links Object.
 type Link struct {
-	Id          string    `gorm:"not null;primaryKey"` // the short one for link
-	Title       string    `gorm:"not null;"`           // title
-	Description string    `gorm:"not null;"`           // intro
-	Url         string    `gorm:"not null;"`           // true URL of the link
-	ClickCnt    int       `gorm:"not null;"`           // times that the link was clicked
-	CreatedAt   time.Time `gorm:"not null;"`
-	Order       int       `gorm:"not null;"` // how to sort https://stackoverflow.com/questions/514943/order-a-mysql-table-by-two-columns
+	Id          string    `gorm:"not null;primaryKey" json:"id"` // the short one for link
+	Title       string    `gorm:"not null;" json:"title"`        // title
+	Description string    `gorm:"not null;" json:"description"`  // intro
+	Url         string    `gorm:"not null;" json:"url"`          // true URL of the link
+	ClickCnt    int       `gorm:"not null;" json:"click_cnt"`    // times that the link was clicked
+	CreatedAt   time.Time `gorm:"not null;" json:"create_at"`
+	Order       int       `gorm:"not null;" json:"order"` // how to sort https://stackoverflow.com/questions/514943/order-a-mysql-table-by-two-columns
 }
 
 func (o *Link) Create(db *gorm.DB) (err error) {
@@ -37,6 +41,7 @@ func (o *Link) Create(db *gorm.DB) (err error) {
 
 func (o *Link) Read(db *gorm.DB) (err error) {
 	tx := db.First(o)
+	fmt.Println(tx)
 	return tx.Error
 }
 
@@ -48,9 +53,9 @@ func (o *Link) Delete(db *gorm.DB) (err error) {
 
 // to store the tag relationships.
 type Tag struct {
-	Tag string `gorm:"primaryKey;not null"`
-	Id  string `gorm:"primaryKey;not null;index"`
-	Cnt int    `gorm:"not null;"` // times that the tag was tagged
+	Tag string `gorm:"primaryKey;not null" json:"tag"`
+	Id  string `gorm:"primaryKey;not null;index" json:"id"`
+	Cnt int    `gorm:"not null;" json:"cnt"` // times that the tag was tagged
 }
 
 func (o *Tag) Create(db *gorm.DB) (err error) {

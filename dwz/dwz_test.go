@@ -13,3 +13,8 @@ func TestGetUrl(t *testing.T) {
 	}
 	fmt.Println(r)
 }
+
+func TestAddUrl(t *testing.T) {
+	err := AddUrl("title", "https://example.com", "description")
+	t.Error(err)
+}

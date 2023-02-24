@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
+	dwz.Init()
+
 	app := fiber.New()
 
 	// note tested

@@ -1,6 +1,9 @@
 package dwz
 
-import "math/rand"
+import (
+	"fmt"
+	"math/rand"
+)
 
 // import "crypto/rand"
 
@@ -49,6 +52,7 @@ func AddUrl(title, url, description string) error { // works well
 	// var err error
 	id := GenID(4)
 	for _, err := GetUrl(id); err == nil; {
+		fmt.Println(err)
 		id = GenID(4)
 		_, err = GetUrl(id)
 	}
@@ -103,6 +107,18 @@ func AddTag(tag, id string) error {
 // https://gorm.io/zh_CN/docs/query.html#%E6%9D%A1%E4%BB%B6
 func ReadLinksByTag(tag string) ([]*Link, error) {
 	var rst []*Link
-	tx := db.InnerJoins("Id").Find(rst)
+	tx := db.Model(&Tag{}).Where("tags.tag = ?", tag).Joins("INNER JOIN `links` on links.id = tags.id").Find(rst)
 	return rst, tx.Error
 }
+
+// tx := db.Raw("select links.id, links.title, links.description, links.url, links, ").Find(rst)
+
+// if err = db.Joins("JOIN artist_movies on artist_movies.artist_id=artists.id").
+// 	Joins("JOIN movies on artist_movies.movie_id=movies.id").Where("movies.title=?", "Nayagan").
+// 	Group("artists.id").Find(&artists).Error; err != nil {
+// 		log.Fatal(err)
+// }
+
+// for _, ar := range artists {
+// 	fmt.Println(ar.Name)
+// }
