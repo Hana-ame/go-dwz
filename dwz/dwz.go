@@ -107,7 +107,7 @@ func AddTag(tag, id string) error {
 // https://gorm.io/zh_CN/docs/query.html#%E6%9D%A1%E4%BB%B6
 func ReadLinksByTag(tag string) ([]*Link, error) {
 	var rst []*Link
-	tx := db.Model(&Tag{}).Where("tags.tag = ?", tag).Joins("INNER JOIN `links` on links.id = tags.id").Find(rst)
+	tx := db.Model(&Link{}).Joins("INNER JOIN `tags` ON tags.id = links.id").Where("tags.tag=?", tag).Find(&rst)
 	return rst, tx.Error
 }
 
