@@ -31,7 +31,7 @@ func main() {
 			return err
 		}
 
-		err = dwz.AddUrl(o.Url, o.Description)
+		err = dwz.AddUrl(o.Title, o.Url, o.Description)
 		if err != nil {
 			return err
 		}

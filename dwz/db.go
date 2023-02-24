@@ -22,6 +22,7 @@ func Init() (err error) {
 // to store the links Object.
 type Link struct {
 	Id          string    `gorm:"not null;primaryKey"` // the short one for link
+	Title       string    `gorm:"not null;"`           // title
 	Description string    `gorm:"not null;"`           // intro
 	Url         string    `gorm:"not null;"`           // true URL of the link
 	ClickCnt    int       `gorm:"not null;"`           // times that the link was clicked

@@ -44,7 +44,7 @@ func GetUrl(id string) (string, error) {
 	return l.Url, nil
 }
 
-func AddUrl(url, description string) error { // works well
+func AddUrl(title, url, description string) error { // works well
 	// var id string
 	// var err error
 	id := GenID(4)
@@ -56,6 +56,7 @@ func AddUrl(url, description string) error { // works well
 	// create a link
 	link := &Link{
 		Id:          id,
+		Title:       title,
 		Url:         url,
 		Description: description,
 		ClickCnt:    0,
