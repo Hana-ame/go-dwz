@@ -76,6 +76,18 @@ func main() {
 	})
 
 	// not tested
+	app.Get("/tag", func(c *fiber.Ctx) error {
+		id := c.Query("id", "")
+		if id == "" {
+			return c.Status(fiber.StatusBadRequest).SendString("Sould have id")
+		}
+
+		// Todo, return Link's Tags.
+
+		return nil
+	})
+
+	// not tested
 	app.Get("/tag/:tag", func(c *fiber.Ctx) error {
 		tag := c.Params("tag", "")
 		if tag == "" {
