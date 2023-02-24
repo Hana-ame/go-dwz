@@ -12,10 +12,11 @@ export default defineConfig({
   },
   base: "",
   server: {
+    // port: 3000,
     proxy: {
-      "/go" : "http://localhost:3000", // it works like prefix (/go*)
-      "/link" : "http://localhost:3000",
-      "/tag" : "http://localhost:3000",
+      "/go" : "http://127.0.0.1:3000", // it works like prefix (/go*)
+      "/link" : "http://127.0.0.1:3000",
+      "/tag" : "http://127.0.0.1:3000",
     }
   }
 })
